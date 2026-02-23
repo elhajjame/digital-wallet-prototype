@@ -46,4 +46,4 @@ const withdraw = (req, res, body) => {
   }
 }
 
-module.exports = { getWallets, createWallet, deposit, withdraw };
+module.exports = { getWallets, createWallets, deposit, withdraw };

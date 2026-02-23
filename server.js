@@ -1,20 +1,29 @@
-const http = require("http"); // built in node js module
+const http = require("http");
+const usersRoutes = require("./routes/users");
+const walletsRoutes = require("./routes/wallets");
 
-// this function run every time  when u visit localhost..
 const server = http.createServer((req, res) => {
-    res.setHeader('Content-type', 'application/json');
-    let body = '';
-    // node js processes incomig data in stream if usser sends large file it devide it into small pieces, node doesnt wait for the whole thing 
-    // req.on this is event listener means whatever a piece of data coming run this code    
-    req.on('data', chunk => {
-        body = body + chunk;
+    res.setHeader("Content-Type", "application/json");
+
+    let body = "";
+
+
+    req.on("data", chunk => {
+        body += chunk;
     });
-    // when all data arrived 
-    req.on('end', () => {
+
+    req.on("end", () => {
         body = body ? JSON.parse(body) : {};
-    })
+        usersRoutes(req, res, body);
+        walletsRoutes(req, res, body);
+
+        if (!res.writableEnded) {
+            res.statusCode = 404;
+            res.end(JSON.stringify({ message: "Route not found" }));
+        }
+    });
 });
 
-server.listen('3000', () => {
-    console.log('server listening on port 3000');
+server.listen(3000, () => {
+    console.log("Server listening on port 3000");
 });

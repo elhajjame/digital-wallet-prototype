@@ -1,11 +1,11 @@
-const { getUsers } = require("../controllers/users")
+const { getUser, createUser } = require("../controllers/users")
 
 const userRoutes = (req, res, body) => {
   if (req.method === 'GET' && req.url === '/users') {
-    return getUsers(req, res);
+    return getUser(req, res);
   }
   if (req.method === 'POST' && req.url === '/users') {
-    return getUsers(req, res, body);
+    return createUser(req, res, body);
   }
 }
 

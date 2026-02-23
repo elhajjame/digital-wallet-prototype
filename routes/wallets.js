@@ -1,4 +1,4 @@
-const { getWallets, createWallet, deposit, withdraw } = require("../controllers/walletsController");
+const { createWallets, getWallets, deposit, withdraw } = require("../controllers/wallets")
 
 const walletsRoutes = (req, res, body) => {
   if (req.method === "GET" && req.url === "/wallets") {
@@ -6,7 +6,7 @@ const walletsRoutes = (req, res, body) => {
   }
 
   if (req.method === "POST" && req.url === "/wallets") {
-    return createWallet(req, res, body);
+    return createWallets(req, res, body);
   }
 
   if (req.method === "POST" && req.url === "/deposit") {

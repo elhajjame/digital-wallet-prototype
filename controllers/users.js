@@ -1,7 +1,7 @@
-const { users } = require('../data/store');
+const { user } = require('../data/store');
 
 const getUser = (req, res) => {
-  res.end(JSON.stringify(users));
+  res.end(JSON.stringify(user));
 }
 
 const createUser = (req, res, body) => {
@@ -9,7 +9,7 @@ const createUser = (req, res, body) => {
     id: Date.now(),
     name: body.name
   }
-  users.push(newUser);
+  user.push(newUser);
   res.end(JSON.stringify(newUser));
 }
 
